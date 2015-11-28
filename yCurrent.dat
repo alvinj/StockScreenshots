@@ -1,0 +1,10 @@
+URLS="
+http://finance.yahoo.com/echarts?s=DVY+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=IBB+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=IWB+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=IWN+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=IWO+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=IWR+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=JKE+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+http://finance.yahoo.com/echarts?s=VIG+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
+"

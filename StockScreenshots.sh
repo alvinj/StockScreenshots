@@ -1,12 +1,22 @@
 #!/bin/bash
 
-URLS="
-http://finance.yahoo.com/echarts?s=AFL+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
-http://finance.yahoo.com/echarts?s=F+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
-http://finance.yahoo.com/echarts?s=GWW+Interactive%23%7B%2522range%2522:%25226mo%2522,%2522allowChartStacking%2522:true%7D#{"range":"5y","allowChartStacking":true}
-"
+# script expects three command-line args
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
+then
+    echo ""
+    echo "    Usage: StockScreenshots.sh dataFilename outputPdfFilename croppingString"
+    echo "    Ex:    StockScreenshots.sh aa.dat aa.pdf 1300x1053+300+23"
+    echo ""
+    echo "           croppingString format: 1088x624+470+318 works well for yahoo finance (just the graph)"
+    echo "                                  1300x1053+300+23 works well for the full browser"
+    echo ""
+    exit -1
+fi
+DATA_FILE=$1
+OUTPUT_FILE=$2
+CROPPING_STRING=$3
 
-OUTPUT_FILE=stock_screenshots.pdf
+source $DATA_FILE
 
 rm *.jpg 2> /dev/null
 
@@ -46,7 +56,8 @@ sleep 4
 echo "cropping the images ..."
 for i in `ls *.jpg`
 do
-    mogrify -crop 1088x624+470+318 $i             # corresponds to the size in OpenSafariAndSizeIt.sh
+    mogrify -crop $CROPPING_STRING $i             # corresponds to the size in OpenSafariAndSizeIt.sh
+                                                  # "1088x624+470+318" for yahoo finance
 done
 sleep 1
 
