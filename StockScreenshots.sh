@@ -1,20 +1,61 @@
 #!/bin/bash
 
-# script expects three command-line args
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
-then
+#--------------------------------------------------------------
+# note: apple/ilife sound effects are under this folder:
+#       /Library/Audio/Apple\ Loops/Apple/iLife\ Sound\ Effects
+#--------------------------------------------------------------
+
+function print_usage {
     echo ""
-    echo "    Usage: StockScreenshots.sh dataFilename outputPdfFilename croppingString"
-    echo "    Ex:    StockScreenshots.sh aa.dat aa.pdf 1300x1053+300+23"
+    echo "    Usage: StockScreenshots.sh -d dataFilename -o outputFilename -c croppingString -s soundFilename"
+    echo "    Ex:    ./StockScreenshots.sh -d aa.dat -o aa.pdf -c 1300x1053+300+23 -s west_precinct_short.caf"
     echo ""
     echo "           croppingString format: 1088x624+470+318 works well for yahoo finance (just the graph)"
     echo "                                  1300x1053+300+23 works well for the full browser"
     echo ""
-    exit -1
+    echo "           The sound file is optional. If supplied, the sound will be played and then the script"
+    echo "           will sleep for 30 seconds before starting. This is intended as a 'warning' in case"
+    echo "           you have automated the starting of this script (like a crontab entry). If you hear"
+    echo "           this sound while using the computer, you will then have 30 seconds before the script"
+    echo "           starts."
+    echo ""
+}
+
+# get the command line args
+while getopts c:d:s:o: option
+do
+    case "$option" in
+    c)
+         CROPPING_STRING=$OPTARG
+         ;;
+    d)
+         DATA_FILE=$OPTARG
+         ;;
+    o)
+         OUTPUT_FILE=$OPTARG
+         ;;
+    s)
+         SOUND_FILE=$OPTARG
+         ;;
+        esac
+done
+
+
+# exit if any required args are missing
+if [ -z "$CROPPING_STRING" ] || [ -z "$DATA_FILE" ] || [ -z "$OUTPUT_FILE" ]
+then
+    print_usage
+    exit 1
 fi
-DATA_FILE=$1
-OUTPUT_FILE=$2
-CROPPING_STRING=$3
+
+
+# if sound file is given, play a sound file and then wait
+if [ ! -z $SOUND_FILE ]
+then
+    afplay $SOUND_FILE
+    sleep 30
+fi
+
 
 source $DATA_FILE
 
